@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+#  vira – vi resguardando arquivo anterior
+#
+if  [ $# -ne 1 ]     # Recebi o nome do arquivo?
+then
+    echo "Erro -> Uso: $0 <ARQUIVO>" > /dev/stderr    # Ou >&2
+    exit 1
+fi
+Arq=$1
+if  [ ! -f "$Arq" ]   # O arquivo não existe; logo como salvá-lo?
+then
+    vi $Arq
+    exit
+fi
+if  [ ! -w "$Arq" ]    # Sera' que tenho permissao de gravacao no arquivo?
+then
+    echo "Erro $0: Voce nao tem direito de gravacao em $Arq" >&2
+    exit 2
+fi
+cp $Arq $Arq~
+vi $Arq

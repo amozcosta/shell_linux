@@ -1,0 +1,28 @@
+#!/bin/bash
+while true                              # Só sai do loop se encontrar um break
+do
+    clear
+    tput cup 10 15
+    echo -n "Entre com sua matricula: "
+    read Matric
+    if  [[ -z "$Matric" ]]              # Se a variável Matric estiver vazia...
+    then
+        tput cup 12 15
+        echo -n "Deseja abandonar? (N/s) "  # O N, por estar maiúsculo, é o default
+        read sn
+        if [[ $sn == S || $sn == s ]]	# Testo se é s em caixa alta ou caixa baixa
+        then
+            exit
+        fi
+        continue
+    fi
+    if  expr $Matric + 0 > /dev/null 2>&1   # Se der erro, $Matric não é numérica
+    then
+        break
+    else
+        tput cup 12 15
+        echo -n "Matricula Nao Numerica. Tecle <ENTER> p/ continuar..."
+        read
+        continue
+    fi
+done

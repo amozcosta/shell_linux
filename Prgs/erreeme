@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+#  Salvando Copia de Arquivo Antes de Remove-lo
+#
+if  [ $# -eq 0 ]	        # Deve ter um ou mais arquivos para remover
+then
+    echo "Erro -> Uso: $0 arq [arq] ... [arq]
+        O uso de metacaracteres eh permitido. Ex. $0 arq*" >&2
+    exit 1
+fi
+MeuDir="/tmp/$LOGNAME"	    # Variável do sist. Contém o nome do usuário.
+if  [ ! -d $MeuDir ]	    # Se não existir o meu diretório sob o /tmp...
+then
+    mkdir $MeuDir	        # Vou criá-lo
+fi
+if  [ ! -w $MeuDir ]	    # Se não posso gravar no diretório...
+then
+    echo "Impossivel salvar arquivos em $MeuDir.
+        Mude permissao e tente novamente..." > /dev/stderr
+    exit 2
+fi
+Erro=0	                    # Variável para passar o $? do prg
+for Arq
+do
+    if  [ ! -f $Arq ]       # Se este arquivo não existir...
+    then
+        echo $Arq nao existe. > /dev/stderr
+        Erro=3
+        continue	        # Volta para o comando for
+    fi
+    DirOrig=`dirname $Arq`	# dirname informa o nome do diretório de $Arq
+    if  [ ! -w $DirOrig ]	# Verifica permissão de gravação no diretório
+    then
+        echo Sem permissao de remover no diretorio de $Arq >&2
+        Erro=4
+        continue	        # Volta para o comando for
+    fi
+    if  [ "$DirOrig" = "$MeuDir" ]	# Se estou “esvaziando a lixeira”...
+    then
+        echo $Arq ficara sem copia de seguranca
+        rm -i $Arq	        # Pergunto se deseja remover
+        [ -f $Arq ] || echo $Arq removido	# Será que o usuário aceitou a remoção?
+        continue
+    fi
+    cd $DirOrig             # Esta linha e a próxima são para uso do undelete
+    echo -e "\n`pwd`" >> $Arq
+    mv $Arq $MeuDir	        # Salvo e deleto
+    echo $Arq removido
+done
+exit $Erro	                # Passo número do erro para o código de retorno

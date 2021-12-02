@@ -1,0 +1,32 @@
+#!/bin/bash
+#  Testa de que tipo eh um caracter recebido por parametro
+#
+erro=0 
+#####          Teste da Quantidade de Parametros           #####
+if  [ "$#" -ne 1 ]
+then
+    echo Uso: $0 caractere >&2     ## $0 tem o nome do programa
+    erro=1
+fi
+#####  Testa se o parâmetro tem o tamanho de um caractere  #####
+case $1 in
+    ?)  ;;                         ## Se tiver somente um caractere
+    *)  echo Erro: Parâmetro passado só pode ter um caractere >&2
+        erro=2
+        ;;
+esac
+#####  Se houve erro o programa termina, passando o código do erro  #####
+if  [ "$erro" -ne 0 ]
+then
+    exit $erro	                   ## O código de retorno será o do último erro
+fi
+case $1 in
+[a-z])  echo Letra Minúscula
+        ;;
+[A-Z])  echo Letra Maiúscula
+        ;;
+[0-9])  echo Número
+        ;;
+    *)  echo Caractere Especial	Veja o asterisco sendo usado como “o resto”
+        ;;	                       ## Ponto e vírgulas antes do esac são opcionais
+esac

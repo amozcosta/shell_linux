@@ -1,0 +1,8 @@
+#!/bin/bash
+#  grep recursivo. Pesquisa cadeia de caracteres recursivamente
+#+ Precisa dos seguintes parâmetros:
+#+    $1 - Diretório inicial de pesquisa
+#+    $2 - Cadeia a ser pesquisada
+#
+find $1 -type f -print | xargs grep -l "$2"    # -type f = arquivos normais
+

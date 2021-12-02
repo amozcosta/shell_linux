@@ -1,0 +1,12 @@
+#!/bin/bash
+# Rapidamente converte arquivos *.html em *.htm
+# Altera as extensões e mantendo o nome do arquivo
+for Arq in *.html
+do
+    if  [[ -f ${Arq%l} ]]
+    then
+        echo ${Arq%l} já existe
+    else
+        mv $i ${Arq%l}
+    fi
+done

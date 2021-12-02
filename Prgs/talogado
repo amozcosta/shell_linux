@@ -1,0 +1,9 @@
+#/bin/bash
+#  Verifica se determinado usuario esta "logado"
+#
+if  who | grep $1
+then
+    echo $1 esta logado
+else
+    echo $1 nao esta logado
+fi

@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# Restaura arquivos deletados via erreeme
+#
+if [ $# -eq 0 ]
+then
+    echo "Uso: $0 <NOME DO ARQUIVO A RESTAURAR>" >&2
+    exit 1
+fi
+[[ -e /tmp/$LOGNAME/$1 ]] || {      # Está na lixeira?
+    echo $1 não está na lixeira /dev/stderr
+    exit 1
+}
+Dir=`tail -1 /tmp/$LOGNAME/$1`	        # Última linha do arq. (que contém o dir original)
+grep -v $Dir /tmp/$LOGNAME/$1>$Dir/$1	# Exclui última linha. Saída com nome original
+rm /tmp/$LOGNAME/$1                     # Remove arquivo que estava moribundo

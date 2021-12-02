@@ -1,0 +1,121 @@
+Capítulo 4
+
+===Exercício 1===
+Sobre a variável BASH_REMATCH, podemos afirmar que:
+I. É um vetor;
+II. É alimentada pelo comando test usando Expressões Regulares;
+III. Guarda o código de erro da última instrução;
+IV. No seu índice 0 (zero) tem todo o texto casado pela Expressão Regular;
+V. Nos índices superiores a zero (0) tem os textos que foram casados com os grupos da Expressão Regular;
+VI. Esta variável tem o ponteiro para o próximo comando test.
+Estão certas as linhas:
+A) Todas estão certas
+B) II, III e VI estão certas
+C) II, III, V e VI
+D) I, II, IV e V
+E) Todas estão erradas
+
+A resposta correta é a D
+
+===Exercício 2===
+Fazer um programa que imprima a hora do sistema (horas e minutos) no formato 12 horas (ex.: 7:00 am/pm).
+Observações:
+1 - 12:00 e 00:00 não são AM nem PM
+2 - A hora do sistema pode ser obtida com o comando date +%H e os minutos com date +%M
+
+$ cat exerc4-2.sh
+#!/bin/bash
+#  Execício 2 do capítulo 4
+#  Passa a data do sistema para o formato AM - PM
+
+#Hora=$(date +%H)
+#Min=$(date +%M)
+Hora=$1
+Min=$2
+Horario=$Hora:$Min
+AP=AM
+[[ $Horario =~ (00|12):00 ]] && {
+    echo $Horario
+    exit
+}
+((10#$Hora >= 12)) && {     # Especificando que a base é 10 para não dar erro às 08 e 09 horas
+    let Hora-=12
+    AP=PM
+}
+echo $Hora:$Min $AP
+
+===Exercício 3===
+Escreva um programa que dê bom dia, boa tarde ou boa noite, de acordo com a hora apresentada pelo comando date.
+$ cat exerc4-3.sh
+#!/bin/bash
+#  Execício 3 do capítulo 4
+#  Dá bom dia, boa tarde ou boa noite dependendo
+#+ do horário do sistema
+Hora=$(date +%H)
+case $Hora in  # Poderia ser case $(date +%H) in
+    0[0-9]|1[01]) echo Bom dia
+                  ;;
+          1[2-7]) echo Boa tarde
+                  ;;
+               *) echo Boa noite
+                  ;;  # Este terminador (;;) antes do esac é opcional
+esac
+
+
+
+
+
+4. Gotas de chuva. Se o parâmetro recebido for:
+Múltiplo de	Escreva
+	3	Ping
+	5	Pang
+	7	Pong
+Se não for múltiplo de nenhum desses, escreva o número. Ex:
+$ chuva.sh 13
+13
+$ chuva.sh 9
+Ping
+$ chuva.sh 21
+PingPong
+$ chuva.sh 105
+PingPangPong
+5. Seu script receberá um ano e você dirá se se ele é bissexto ou não.
+Um ano para ser bissexto tem de atender às três seguintes exigências:
+1. Tem de ser divisível por 4;
+2. Exceto os que são divisíveis por 100;
+3. A não ser que seja divisível por 400.
+Por exemplo:
+1950 não foi bissexto por não ser divisível por 4 (um macete matemático: para ser divisível por 4 basta que o número formado pelos 2 últimos algarismos do ano – nesse caso 50 – seja divisível por 4);
+1900 não foi bissexto porque era múltiplo de 100;
+2000 foi bissexto porque apesar de ser divisível por 100 (como 1900 que acabamos de ver), também o é por 400.
+6. Sobre os terminadores do comando case podemos dizer que:
+
+;;
+;?
+;;?
+A
+Sempre executa o próximo bloco
+Termina a execução do case
+Testa as próximas condições até sair
+B
+Termina a execução do case
+Testa as próximas condições até sair
+Sempre executa o próximo bloco
+C
+Testa as próximas condições até sair
+Sempre executa o próximo bloco
+Termina a execução do case
+D
+Sempre executa o próximo bloco
+Testa as próximas condições até sair
+Termina a execução do case
+E
+Termina a execução do case
+Sempre executa o próximo bloco
+Testa as próximas condições até sair
+Qual alternativa na tabela acima está correta?
+A) Alternativa A
+B) Alternativa B
+C) Alternativa C
+D) Alternativa D
+E) Alternativa E

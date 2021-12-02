@@ -1,0 +1,4 @@
+#!/bin/bash'
+cd $1
+echo Os Arquivos do Diretorio $1 Sao:
+ls -l

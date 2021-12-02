@@ -1,0 +1,17 @@
+#!/bin/bash
+Para=$(($(tput lines) - 3))     # Para parar 3 linhas antes do total de linhas
+clear
+echo -e 'Números\n'
+while read Linha
+do
+    ((++ContLin == (Para-1))) && {  # Quebra página
+        tput cup $Para 0
+        echo -n 'Digite X para terminar ou outra coisa para continuar: '
+        read Resp < /dev/tty
+        clear
+        [[ $Resp == X ]] && exit
+        echo -e 'Números\n'
+        ContLin=1
+    }
+    echo -e "$ContLin\t$Linha"
+done < arqtst

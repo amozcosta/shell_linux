@@ -1,0 +1,36 @@
+#!/bin/bash
+#  Menu do cadastro de telefones
+#
+echo -n "
+                Opcao   Acao
+                =====   ====
+                  1     Procurar Alguem
+                  2     Adicionar Alguem ao Caderno de Telefones
+                  3     Remover Alguem do Cadastro de Telefones
+                  4     Listagem do Caderno de Telefones
+                Escolha Uma Das Opcoes Acima (1-4): "
+read Opcao
+echo                                # Só para saltar linha
+case "$Opcao"
+in
+    1) echo -e "          Entre com o nome a pesquisar: \n"
+       read Nome
+       pp "$Nome"
+       ;;
+    2) echo -e "          Nome a ser adicionado: \n"
+       read Nome
+       echo -e "          Telefone de $Nome: \n"
+       read Telef
+       add "$Nome" "$Telef"
+       ;;
+    3) echo -e "          Nome a ser removido: \n"
+       read Nome
+       rem "$Nome"
+       ;;
+    4) lt
+       ;;
+    *) echo "Soh sao validas opcoes entre 1 e 4"
+       exit 1
+       ;;
+esac
+exit

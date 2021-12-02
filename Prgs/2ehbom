@@ -1,0 +1,13 @@
+#!/bin/bash
+Conta=1
+while [[ $Conta -le $1 ]]
+do
+    Resto=$((Conta % 2))
+    if  ((Resto == 1))  # Se resto da divisão por 2 for = 1, não é múltiplo
+    then
+        let Conta++
+        continue        # Volta ao comando do sem executar fim do loop
+    fi
+    echo $Conta eh múltiplo de dois.
+    let Conta++
+done

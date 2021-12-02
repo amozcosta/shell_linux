@@ -1,0 +1,6 @@
+#!/bin/bash
+echo O programa $0 Recebeu $# Parametros
+echo $1
+echo $2
+shift 10
+echo $1

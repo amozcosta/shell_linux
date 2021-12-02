@@ -1,0 +1,4 @@
+#!/bin/bash
+#    Pesquisa Pessoa no Catalogo Telefonico
+#
+grep $1 telefones

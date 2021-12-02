@@ -1,0 +1,11 @@
+#!/bin/bash
+# Tira espaços em branco do nome do arquivo
+for Arq in *' '*
+do
+    if  [ -f "${Arq/ /_}" ]
+    then
+        echo "${Arq/ /_}" já existe
+    else
+        mv "$Arq" "${Arq/ /_}"
+    fi
+done

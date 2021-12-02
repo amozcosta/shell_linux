@@ -1,0 +1,4 @@
+#!/bin/bash
+# Adiciona Pessoas ao Arquivo de Telefones
+#
+echo "$1    $2" >> telefones

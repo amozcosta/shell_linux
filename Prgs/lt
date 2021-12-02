@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+#  Lista o conteúdo do arquivo de telefones
+#
+ContaLinha=0                    # Variável para fazer quebra de página.
+clear
+echo -e "\nNome               Telefone\n"
+while read Linha                # Lendo o arquivo telefones
+do
+    if  ((ContaLinha >= 21))    # Se ContaLinha ≥ 21 quebra a página.
+    then
+        tput cup 24 28
+        echo -n "Tecle <ENTER> para prosseguir ou X para terminar..."
+        read Char < /dev/tty    # Lê a opção, recebendo a escolha pelo teclado.
+        if  [[ $a = X ]]
+        then
+            exit                # Se operador teclou X, termina programa.
+        fi
+        clear
+        echo "
+Nome               Telefone
+"
+        ContaLinha=0
+    fi
+    echo "$Linha"
+    let ContaLinha++
+done < ../Arqs/telefones
+tput cup 24 49
+echo -n "Tecle <ENTER> para terminar... "
+read Char                       # Está fora do loop. Não redirecionei leitura.
+clear
+exit

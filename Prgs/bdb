@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+#  Avisa que determinada usuaria se conectou
+#
+if  [ "$#" -ne 1 ]
+then
+    echo "Erro -> Uso: $0 usuario" >&2
+    exit 1
+fi
+until who | grep $1 > /dev/null     # O until está testando retorno do comando grep
+do
+    sleep 30
+done
+echo $1 se logou

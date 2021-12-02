@@ -1,0 +1,7 @@
+#!/bin/bash
+echo O programa $0 Recebeu $# Parametros
+echo -n "Que sao: "
+for i
+do
+    echo -n "$i "
+done

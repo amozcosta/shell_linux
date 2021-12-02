@@ -1,0 +1,19 @@
+Capítulo zero
+
+===Exercício1===
+$ ls arq[123]
+arq1  arq2
+$ echo arq[123]
+arq1 arq2
+$ ls arq{1..3}
+ls: não é possível acessar 'arq3': Arquivo ou diretório não encontrado
+arq1  arq2
+$ echo arq{1..3}
+arq1 arq2 arq3
+
+===Exercício2===
+Fazendo-se mkdir tmp/local/{,bons,ruins},
+serão gerados os seguintes diretórios:
+/tmp/local
+/tmp/local/bons
+/tmp/local/ruins

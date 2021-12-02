@@ -1,0 +1,15 @@
+#!/bin/bash
+#  Testa a resposta a um pedido. Deve ser (S)im ou (N)ao
+#
+resp=$1
+if  test $resp = N
+then
+    echo Ela nao deixa...
+else
+    if  test $resp = S
+    then
+        echo Oba, ela deixou!!!
+    else
+        echo Acho que ela esta na duvida.
+    fi
+fi
