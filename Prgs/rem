@@ -1,5 +1,6 @@
 #!/bin/bash
 # Remove Pessoas do Arquivo de Telefones
 #
-grep -v "$1" telefones > /tmp/$$
-mv /tmp/$$ telefones
+telefones='../Arqs/telefones'
+grep -v "$1" $telefones > /tmp/$$
+mv /tmp/$$ $telefones
